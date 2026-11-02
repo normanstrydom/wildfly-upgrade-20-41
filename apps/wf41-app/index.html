@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WildFly 41 Modern App</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 40px; background: #e8f4f8; color: #333; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 14px; }
+        .badge-modern { background: #d4edda; color: #155724; }
+        pre { background: #272822; color: #a6e22e; padding: 15px; border-radius: 6px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>WildFly 41 Application Node</h2>
+        <p><span class="badge badge-modern">Modernized Target</span></p>
+        <p>This request was handled by the <strong>WildFly 41</strong> Domain Cluster running an HA profile.</p>
+        <h3>Response Payload:</h3>
+        <pre id="json">{
+  "status": "online",
+  "environment": "WildFly 41",
+  "version": "41.0.1.Final",
+  "domain_mode": true,
+  "profile": "full-ha",
+  "server_group": "other-server-group",
+  "port_offset": 100,
+  "http_port": 8180,
+  "management_port": 10090,
+  "message": "Serving traffic on modernized WildFly 41 cluster"
+}</pre>
+    </div>
+</body>
+</html>

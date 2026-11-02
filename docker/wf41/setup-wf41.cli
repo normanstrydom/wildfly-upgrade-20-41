@@ -1,0 +1,11 @@
+embed-host-controller --domain-config=domain.xml --host-config=host.xml
+
+# Configure server-one to run in HA server group (full-ha profile) with offset 100
+/host=primary/server-config=server-one:write-attribute(name=group, value=other-server-group)
+/host=primary/server-config=server-one:write-attribute(name=socket-binding-port-offset, value=100)
+/host=primary/server-config=server-two:write-attribute(name=auto-start, value=false)
+
+# Deploy sample application as ROOT.war to other-server-group
+deploy /opt/jboss/wildfly/wf41-app.war --name=ROOT.war --server-groups=other-server-group
+
+stop-embedded-host-controller
