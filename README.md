@@ -25,6 +25,8 @@ RUN chmod +x /opt/entrypoint.sh
 EXPOSE 8080 9990 8180 10090
 ENTRYPOINT ["/opt/entrypoint.sh"]
 
+Remove-Item Env:\WILDFLY_PASSWORD
+
 
 
 
@@ -85,3 +87,12 @@ echo "WildFly has started! Executing commands..."
 
 # 4. Bring the background domain process back to the foreground so the script doesn't exit immediately
 wait
+
+
+Remove-Item Env:\WILDFLY_PASSWORD
+
+/server-group=my-new-group:add(profile=full, socket-binding-group=full-sockets)
+/host=master/server-config=my-server-instance:add(group=my-new-group, auto-start=true, socket-binding-port-offset=100)
+/host=master/server-config=my-server-instance:stop
+/host=master/server-config=my-server-instance:remove
+/server-group=my-new-group:remove
