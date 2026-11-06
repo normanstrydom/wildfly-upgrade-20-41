@@ -30,3 +30,10 @@ ENTRYPOINT ["/opt/entrypoint.sh"]
 
 
 docker build -t wildfly-dual .
+
+
+docker build -t wildfly-dual . 
+
+docker exec -it aaa bash
+
+

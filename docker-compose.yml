@@ -1,0 +1,36 @@
+services:
+  wildfly:
+    image: wildfly-dual
+    build: .
+    container_name: wildfly-dual-masters
+    networks:
+      - wildfly-net
+    environment:
+      WILDFLY_USER: ${WILDFLY_USER}
+      WILDFLY_PASSWORD: ${WILDFLY_PASSWORD}
+    ports:
+      - "12080:8080"
+      - "12990:9990"
+      - "13080:18080"
+      - "13990:19990"
+
+  wildfly-slaves:
+    image: wildfly-dual
+    build: .
+    profiles: ["manual"]
+    container_name: wildfly-dual-slaves
+    networks:
+      - wildfly-net
+    environment:
+      WILDFLY_USER: ${WILDFLY_USER}
+      WILDFLY_PASSWORD: ${WILDFLY_PASSWORD}
+    ports:
+      - "22080:8080"
+      - "22990:9990"
+      - "23080:18080"
+      - "23990:19990"
+
+networks:
+  wildfly-net:
+    name: wildfly-net
+    driver: bridge
