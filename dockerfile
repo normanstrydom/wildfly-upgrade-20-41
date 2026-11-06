@@ -31,6 +31,8 @@ COPY start-wf20.sh /soa/
 COPY configure-wf41.sh /soa/
 COPY start-wf41.sh /soa/
 COPY init-masters.sh /soa/
+COPY wf20.cli /soa/
+COPY wf41.cli /soa/
 
 RUN dos2unix /soa/*.sh
 

@@ -1,0 +1,14 @@
+batch
+/host=primary/server-config=server-one:write-attribute(name=socket-binding-port-offset, value=2150)
+/host=primary/server-config=server-two:write-attribute(name=socket-binding-port-offset, value=2300)
+/host=primary/server-config=server-three:remove
+/server-group=other-server-group:remove
+/server-group=load-balancer-server-group:add(profile=load-balancer, socket-binding-group=load-balancer-sockets)
+/host=primary/server-config=load-balancer:add(group=load-balancer-server-group, auto-start=true, socket-binding-port-offset=2000)
+/server-group=full-ha-server-group:add(profile=full-ha, socket-binding-group=full-ha-sockets)
+/host=primary/server-config=server-ha-01:add(group=full-ha-server-group, auto-start=true, socket-binding-port-offset=2450)
+/host=primary/server-config=server-ha-02:add(group=full-ha-server-group, auto-start=true, socket-binding-port-offset=2600)
+/host=primary/server-config=server-ha-03:add(group=full-ha-server-group, auto-start=true, socket-binding-port-offset=2750)
+run-batch
+
+/host=primary:reload
