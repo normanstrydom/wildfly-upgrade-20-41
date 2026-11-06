@@ -31,13 +31,9 @@ COPY start-wf20.sh /soa/
 COPY configure-wf41.sh /soa/
 COPY start-wf41.sh /soa/
 
-RUN dos2unix /soa/start-wf20.sh \
-    && dos2unix /soa/configure-wf20.sh \
-    && dos2unix /soa/start-wf41.sh \
-    && dos2unix /soa/configure-wf41.sh
+RUN dos2unix /soa/*.sh
 
-RUN chmod +x /soa/start-wf20.sh
-RUN chmod +x /soa/start-wf41.sh
+RUN chmod +x /soa/*.sh
 
 EXPOSE 8080 9990
 EXPOSE 18080 19990

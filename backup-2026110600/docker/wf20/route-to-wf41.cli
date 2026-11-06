@@ -1,1 +1,0 @@
-/profile=full-ha/subsystem=undertow/server=default-server/host=default-host/location="\/api\/v2":add(handler="wf41-handler")

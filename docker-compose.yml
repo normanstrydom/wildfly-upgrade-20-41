@@ -1,8 +1,8 @@
 services:
-  wildfly:
+  wildfly-masters:
     image: wildfly-dual
     build: .
-    container_name: wildfly-dual-masters
+    container_name: wildfly-masters
     networks:
       - wildfly-net
     environment:
@@ -18,9 +18,11 @@ services:
     image: wildfly-dual
     build: .
     profiles: ["manual"]
-    container_name: wildfly-dual-slaves
+    container_name: wildfly-slaves
     networks:
       - wildfly-net
+    depends_on:
+      - wildfly-masters
     environment:
       WILDFLY_USER: ${WILDFLY_USER}
       WILDFLY_PASSWORD: ${WILDFLY_PASSWORD}

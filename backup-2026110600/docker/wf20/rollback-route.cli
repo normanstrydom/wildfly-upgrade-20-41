@@ -1,3 +1,0 @@
-/profile=full-ha/subsystem=undertow/server=default-server/host=default-host/location="\/api\/v2":remove()
-/server-group=other-server-group:reload-servers()
-

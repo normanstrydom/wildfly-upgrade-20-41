@@ -1,6 +1,0 @@
-embed-server -c=standalone.xml
-/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=wf20-backend:add(host="wf20-domain", port=8080)
-/subsystem=undertow/configuration=handler/reverse-proxy=ingress-proxy:add()
-/subsystem=undertow/configuration=handler/reverse-proxy=ingress-proxy/host=wf20-host:add(outbound-socket-binding="wf20-backend", scheme="http", instance-id="wf20", path="/")
-/subsystem=undertow/server=default-server/host=default-host/location="\/":write-attribute(name=handler, value=ingress-proxy)
-stop-embedded-server
