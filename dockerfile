@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-USER root
+# USER root
 
 RUN mkdir -p /soa/downloads /soa/servers/wf21 /soa/servers/wf41 /soa/jdk/jdk11 /soa/jdk/jdk21
 
@@ -20,3 +20,5 @@ RUN useradd -m -s /bin/bash wildfly \
     && chown -R wildfly:wildfly /soa/servers /soa/jdk /soa/downloads
 
 CMD ["tail", "-f", "/dev/null"]
+
+
