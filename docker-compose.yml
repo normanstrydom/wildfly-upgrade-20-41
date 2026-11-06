@@ -5,6 +5,7 @@ services:
     container_name: wildfly-masters
     networks:
       - wildfly-net
+    command: ["bash", "-c", "/soa/init-masters.sh"]
     environment:
       WILDFLY_USER: ${WILDFLY_USER}
       WILDFLY_PASSWORD: ${WILDFLY_PASSWORD}
