@@ -1,0 +1,67 @@
+services:
+  wf-load-balancer:
+    container_name: wf-load-balancer
+    hostname: wf-load-balancer
+    build:
+      context: docker/load-balancer
+      dockerfile: Dockerfile
+    ports:
+      - "${LB_HTTP_PORT:-8080}:8080"
+      - "${LB_MGMT_PORT:-9992}:9990"
+    networks:
+      - wildfly-net
+    depends_on:
+      wf20-domain:
+        condition: service_healthy
+      wf41-domain:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  wf20-domain:
+    container_name: wf20-domain
+    hostname: wf20-domain
+    build:
+      context: .
+      dockerfile: docker/wf20/Dockerfile
+    ports:
+      - "${WF20_HTTP_PORT:-8081}:8080"
+      - "${WF20_MGMT_PORT:-9990}:9990"
+    networks:
+      - wildfly-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+    restart: unless-stopped
+
+  wf41-domain:
+    container_name: wf41-domain
+    hostname: wf41-domain
+    build:
+      context: .
+      dockerfile: docker/wf41/Dockerfile
+    ports:
+      - "${WF41_HTTP_PORT:-8180}:8180"
+      - "${WF41_MGMT_PORT:-10090}:10090"
+    networks:
+      - wildfly-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8180/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+    restart: unless-stopped
+
+networks:
+  wildfly-net:
+    name: wildfly-net
+    driver: bridge
